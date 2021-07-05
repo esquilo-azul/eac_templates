@@ -6,7 +6,7 @@ module EacTemplates
   module VariableProviders
     require_sub __FILE__
 
-    PROVIDERS = %w[entries_reader hash generic].map do |name|
+    PROVIDERS = %w[config_reader entries_reader hash generic].map do |name|
       "eac_templates/variable_providers/#{name}".camelize.constantize
     end
 
