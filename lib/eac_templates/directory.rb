@@ -101,7 +101,7 @@ module EacTemplates
 
       def target_absolute
         ::File.expand_path(source_relative, target_root_directory)
-              .gsub(/#{::Regexp.quote(TEMPLATE_EXTNAME)}\z/, '')
+          .gsub(/#{::Regexp.quote(TEMPLATE_EXTNAME)}\z/, '')
       end
     end
   end
