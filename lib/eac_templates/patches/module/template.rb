@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/string/inflections'
-require 'eac_templates/sources/set'
+require 'eac_templates/modules/base'
 
 class Module
   def template
-    @template ||= ::EacTemplates::Sources::Set.default.template(name.underscore)
+    @template ||= ::EacTemplates::Modules::Base.new(self)
   end
 end
