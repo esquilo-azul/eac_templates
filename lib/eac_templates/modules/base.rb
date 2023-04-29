@@ -16,7 +16,7 @@ module EacTemplates
       end
 
       enable_listable
-      lists.add_symbol :option
+      lists.add_symbol :option, :subpath
       common_constructor :the_module, :options, default: [{}] do
         self.options = self.class.lists.option.hash_keys_validate!(options)
       end
@@ -24,7 +24,8 @@ module EacTemplates
 
       # @return [Pathname]
       def path_for_search
-        self.class.path_for_search(the_module)
+        r = self.class.path_for_search(the_module)
+        subpath.if_present(r) { |v| r.join(v) }
       end
 
       # @return [EacTemplates::Variables::SourceFile, EacTemplates::Variables::SourceNode]
@@ -35,6 +36,11 @@ module EacTemplates
       # @return [EacTemplates::SourceSet]
       def source_set
         ::EacTemplates::Sources::Set.default
+      end
+
+      # @return [Pathname, nil]
+      def subpath
+        options[OPTION_SUBPATH].if_present(&:to_pathname)
       end
     end
   end
