@@ -3,6 +3,7 @@
 require 'active_support/core_ext/object/blank'
 require 'eac_templates/directory'
 require 'eac_templates/file'
+require 'eac_templates/sources/internal_set'
 
 module EacTemplates
   module Sources
@@ -29,14 +30,15 @@ module EacTemplates
       # @return The absolute path of template if found, +nil+ otherwise.
       def template_path(subpath)
         included_paths.each do |included_path|
-          r = search_template_in_included_path(included_path, subpath)
+          r = included_path.search(subpath)
           return r if r
         end
         nil
       end
 
+      # @return [EacTemplates::Sources::InternalSet]
       def included_paths
-        @included_paths ||= ::Set.new
+        @included_paths ||= ::EacTemplates::Sources::InternalSet.new
       end
 
       private
@@ -44,11 +46,6 @@ module EacTemplates
       def raise_template_not_found(subpath)
         raise "Template not found for subpath \"#{subpath}\"" \
           " (Included paths: #{included_paths.to_a.join(::File::PATH_SEPARATOR)})"
-      end
-
-      def search_template_in_included_path(included_path, subpath)
-        path = ::File.join(included_path, subpath)
-        ::File.exist?(path) ? path : nil
       end
     end
   end
