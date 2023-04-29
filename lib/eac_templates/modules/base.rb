@@ -16,7 +16,7 @@ module EacTemplates
       end
 
       enable_listable
-      lists.add_symbol :option, :subpath
+      lists.add_symbol :option, :source_set, :subpath
       common_constructor :the_module, :options, default: [{}] do
         self.options = self.class.lists.option.hash_keys_validate!(options)
       end
@@ -35,7 +35,7 @@ module EacTemplates
 
       # @return [EacTemplates::SourceSet]
       def source_set
-        ::EacTemplates::Sources::Set.default
+        options[OPTION_SOURCE_SET] || ::EacTemplates::Sources::Set.default
       end
 
       # @return [Pathname, nil]
