@@ -15,7 +15,11 @@ module EacTemplates
         end
       end
 
-      common_constructor :the_module
+      enable_listable
+      lists.add_symbol :option
+      common_constructor :the_module, :options, default: [{}] do
+        self.options = self.class.lists.option.hash_keys_validate!(options)
+      end
       delegate(*::EacTemplates::InterfaceMethods::ALL, to: :source_object)
 
       # @return [Pathname]
