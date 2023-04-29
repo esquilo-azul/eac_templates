@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_ruby_utils/core_ext'
-require 'eac_templates/variable_providers'
+require 'eac_templates/variables/providers'
 
 module EacTemplates
   class File
@@ -15,7 +15,7 @@ module EacTemplates
 
     # +variables_provider+ A [Hash] or object which responds to +read_entry(entry_name)+.
     def apply(variables_source)
-      variables_provider = ::EacTemplates::VariableProviders.build(variables_source)
+      variables_provider = ::EacTemplates::Variables::Providers.build(variables_source)
       variables.inject(content) do |a, e|
         a.gsub(variable_pattern(e), variables_provider.variable_value(e).to_s)
       end
