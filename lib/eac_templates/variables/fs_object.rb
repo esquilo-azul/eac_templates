@@ -7,14 +7,8 @@ module EacTemplates
     class FsObject
       TEMPLATE_EXTNAME = '.template'
 
-      attr_reader :source_directory, :source_relative, :target_root_directory, :variables_source
-
-      def initialize(source_directory, source_relative, target_root_directory, variables_source)
-        @source_directory = source_directory
-        @source_relative = source_relative
-        @target_root_directory = target_root_directory
-        @variables_source = variables_source
-      end
+      common_constructor :source_directory, :source_relative, :target_root_directory,
+                         :variables_source
 
       def apply
         if file?
