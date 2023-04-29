@@ -11,11 +11,11 @@ RSpec.describe ::Object do
   let(:templates_path) { ::File.join(__dir__, 'template_spec_files', 'path') }
 
   before do
-    ::EacTemplates::Searcher.default.included_paths.add(templates_path)
+    ::EacTemplates::Sources::Set.default.included_paths.add(templates_path)
   end
 
   after do
-    ::EacTemplates::Searcher.default.included_paths.delete(templates_path)
+    ::EacTemplates::Sources::Set.default.included_paths.delete(templates_path)
   end
 
   describe '#template' do

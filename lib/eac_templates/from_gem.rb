@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_templates/searcher'
+require 'eac_templates/sources/set'
 
 module EacTemplates
   class FromGem
@@ -13,7 +13,7 @@ module EacTemplates
     TEMPLATES_DIR_SUBPATH = 'template'
 
     common_constructor :gemspec, :searcher, default: [nil] do
-      self.searcher ||= ::EacTemplates::Searcher.default
+      self.searcher ||= ::EacTemplates::Sources::Set.default
     end
 
     # @return [Boolean]

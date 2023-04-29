@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_templates/patches/module/template'
-require 'eac_templates/searcher'
+require 'eac_templates/sources/set'
 
 RSpec.describe ::Module do
   def self.on_node_specs(node_name, &block)
@@ -81,7 +81,7 @@ RSpec.describe ::Module do
 
   before do
     %w[path1 path2].each do |sub|
-      ::EacTemplates::Searcher.default.included_paths << files_dir.join(sub)
+      ::EacTemplates::Sources::Set.default.included_paths << files_dir.join(sub)
     end
   end
 
