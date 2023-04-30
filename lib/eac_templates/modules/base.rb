@@ -2,35 +2,22 @@
 
 require 'eac_ruby_utils/core_ext'
 require 'eac_templates/interface_methods'
+require 'eac_templates/modules/ancestor'
 require 'eac_templates/sources/set'
 
 module EacTemplates
   module Modules
     class Base
-      class << self
-        # @param a_module [Module]
-        # @return [Pathname]
-        def path_for_search(a_module)
-          a_module.name.underscore.to_pathname
-        end
-      end
-
       enable_listable
       lists.add_symbol :option, :source_set, :subpath
       common_constructor :the_module, :options, default: [{}] do
         self.options = self.class.lists.option.hash_keys_validate!(options)
       end
-      delegate(*::EacTemplates::InterfaceMethods::ALL, to: :source_object)
+      delegate(*::EacTemplates::InterfaceMethods::ALL, :path_for_search, to: :self_ancestor)
 
-      # @return [Pathname]
-      def path_for_search
-        r = self.class.path_for_search(the_module)
-        subpath.if_present(r) { |v| r.join(v) }
-      end
-
-      # @return [EacTemplates::Variables::SourceFile, EacTemplates::Variables::SourceNode]
-      def source_object
-        source_set.template(path_for_search)
+      # @return [EacTemplates::Modules::Ancestor]
+      def self_ancestor
+        @self_ancestor ||= ::EacTemplates::Modules::Ancestor.new(self, the_module)
       end
 
       # @return [EacTemplates::SourceSet]
