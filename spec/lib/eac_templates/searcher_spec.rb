@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'eac_templates/interface_methods'
 require 'eac_templates/searcher'
 
 RSpec.describe ::EacTemplates::Searcher do
@@ -13,17 +14,27 @@ RSpec.describe ::EacTemplates::Searcher do
 
   describe '#template' do
     {
-      'subdir1' => ::EacTemplates::Directory,
-      'subdir1/file1.template' => ::EacTemplates::File,
-      'subdir1/file2' => ::EacTemplates::File,
-      'subdir1/file3.template' => ::EacTemplates::File,
-      'does_not_exist' => ::NilClass
-    }.each do |subpath, klass|
+      'subdir1' => :directory,
+      'subdir1/file1.template' => :file,
+      'subdir1/file2' => :file,
+      'subdir1/file3.template' => :file,
+      'does_not_exist' => :nil
+    }.each do |subpath, type|
       context "when subpath is \"#{subpath}\"" do
         let(:result) { instance.template(subpath, false) }
 
-        it "returns a #{klass}'s instance" do
-          expect(result).to be_a(klass)
+        case type
+        when :nil
+          it { expect(result).to be_nil }
+        when :directory
+          ::EacTemplates::InterfaceMethods::DIRECTORY.each do |method_name|
+            it { expect(result).to respond_to(method_name) } # rubocop:disable RSpec/RepeatedExample
+          end
+        when :file
+          ::EacTemplates::InterfaceMethods::FILE.each do |method_name|
+            it { expect(result).to respond_to(method_name) } # rubocop:disable RSpec/RepeatedExample
+          end
+        else ibr
         end
       end
     end
