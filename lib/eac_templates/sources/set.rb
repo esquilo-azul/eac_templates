@@ -4,7 +4,6 @@ require 'active_support/core_ext/object/blank'
 require 'eac_templates/sources/directory'
 require 'eac_templates/sources/file'
 require 'eac_templates/variables/directory'
-require 'eac_templates/variables/file'
 require 'eac_templates/sources/internal_set'
 
 module EacTemplates
@@ -29,13 +28,15 @@ module EacTemplates
       end
 
       def template(subpath, required = true)
+        found_file = file(subpath)
+        return found_file if found_file.found?
+
         path = template_path(subpath)
         if path.blank?
           return nil unless required
 
           raise_template_not_found(subpath)
         end
-        return ::EacTemplates::Variables::File.new(path) if ::File.file?(path)
         return ::EacTemplates::Variables::Directory.new(path) if ::File.directory?(path)
 
         raise 'Invalid branching'
