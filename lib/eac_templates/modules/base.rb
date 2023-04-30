@@ -13,7 +13,8 @@ module EacTemplates
       common_constructor :the_module, :options, default: [{}] do
         self.options = self.class.lists.option.hash_keys_validate!(options)
       end
-      delegate(*::EacTemplates::InterfaceMethods::ALL, :path_for_search, to: :self_ancestor)
+      delegate(*::EacTemplates::InterfaceMethods::ALL, :path_for_search, :source_object,
+               to: :self_ancestor)
 
       # @return [EacTemplates::Modules::Ancestor]
       def self_ancestor

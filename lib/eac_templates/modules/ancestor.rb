@@ -34,9 +34,12 @@ module EacTemplates
         subpath.if_present(r) { |v| r.join(v) }
       end
 
-      # @return [EacTemplates::Variables::SourceFile, EacTemplates::Variables::SourceNode]
+      # @return [EacTemplates::Modules::Ancestor::FsObject]
       def source_object
-        source_set.template(path_for_search)
+        return file if file.found?
+        return directory if directory.found?
+
+        raise "No template found: #{path_for_search}"
       end
 
       require_sub __FILE__
