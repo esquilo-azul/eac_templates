@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_templates/file'
+require 'eac_templates/variables/file'
 
 module EacTemplates
   module Variables
@@ -37,7 +37,7 @@ module EacTemplates
 
       def apply_file
         if ::File.extname(source_absolute) == TEMPLATE_EXTNAME
-          ::EacTemplates::File.new(source_absolute).apply_to_file(
+          ::EacTemplates::Variables::File.new(source_absolute).apply_to_file(
             variables_source, target_absolute
           )
         else

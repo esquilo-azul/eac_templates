@@ -2,7 +2,7 @@
 
 require 'active_support/core_ext/object/blank'
 require 'eac_templates/variables/directory'
-require 'eac_templates/file'
+require 'eac_templates/variables/file'
 require 'eac_templates/sources/internal_set'
 
 module EacTemplates
@@ -21,7 +21,7 @@ module EacTemplates
 
           raise_template_not_found(subpath)
         end
-        return ::EacTemplates::File.new(path) if ::File.file?(path)
+        return ::EacTemplates::Variables::File.new(path) if ::File.file?(path)
         return ::EacTemplates::Variables::Directory.new(path) if ::File.directory?(path)
 
         raise 'Invalid branching'

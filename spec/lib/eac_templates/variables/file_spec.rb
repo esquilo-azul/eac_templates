@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'eac_config/old_configs'
-require 'eac_templates/file'
+require 'eac_templates/variables/file'
 
-RSpec.describe ::EacTemplates::File do
+RSpec.describe ::EacTemplates::Variables::File do
   let(:files_dir) { ::File.join(__dir__, 'file_spec_files') }
   let(:source_path) { ::File.join(files_dir, 'source.template') }
   let(:instance) { described_class.new(source_path) }

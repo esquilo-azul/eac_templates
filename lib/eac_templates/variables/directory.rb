@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_templates/file'
+require 'eac_templates/variables/file'
 require 'eac_templates/variables/fs_object'
 
 module EacTemplates
@@ -18,7 +18,7 @@ module EacTemplates
 
       def child(subpath)
         child_path = ::File.join(path, subpath)
-        return ::EacTemplates::File.new(child_path) if ::File.file?(child_path)
+        return ::EacTemplates::Variables::File.new(child_path) if ::File.file?(child_path)
         return ::EacTemplates::Variables::Directory.new(child_path) if ::File.directory?(child_path)
 
         raise "Child \"#{subpath}\" from \"#{path}\" not found"
