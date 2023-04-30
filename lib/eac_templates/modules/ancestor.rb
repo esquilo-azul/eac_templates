@@ -18,6 +18,11 @@ module EacTemplates
       delegate :subpath, :source_set, to: :base
       delegate(*::EacTemplates::InterfaceMethods::ALL, to: :source_object)
 
+      # @return [EacTemplates::Modules::Directory]
+      def directory
+        ::EacTemplates::Modules::Ancestor::Directory.new(self)
+      end
+
       # @return [Pathname]
       def path_for_search
         r = self.class.path_for_search(ancestor)
