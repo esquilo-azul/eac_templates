@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'eac_templates/interface_methods'
 require 'eac_templates/patches/object/template'
 
 RSpec.describe ::Object do
@@ -18,6 +19,8 @@ RSpec.describe ::Object do
   end
 
   describe '#template' do
-    it { expect(instance.template).to be_a(::EacTemplates::File) }
+    ::EacTemplates::InterfaceMethods::FILE.each do |method_name|
+      it { expect(instance.template).to respond_to(method_name) }
+    end
   end
 end
