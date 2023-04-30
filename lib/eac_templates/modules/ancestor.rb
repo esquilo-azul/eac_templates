@@ -23,6 +23,11 @@ module EacTemplates
         ::EacTemplates::Modules::Ancestor::Directory.new(self)
       end
 
+      # @return [EacTemplates::Modules::File]
+      def file
+        @file ||= ::EacTemplates::Modules::Ancestor::File.new(self)
+      end
+
       # @return [Pathname]
       def path_for_search
         r = self.class.path_for_search(ancestor)
