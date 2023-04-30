@@ -13,16 +13,17 @@ RSpec.describe ::EacTemplates::Searcher do
 
   describe '#template' do
     {
-      ::EacTemplates::Directory => %w[subdir1],
-      ::EacTemplates::File => %w[subdir1/file1.template subdir1/file2
-                                 subdir1/file3.template],
-      ::NilClass => %w[does_not_exist]
-    }.each do |klass, subpaths|
-      subpaths.each do |subpath|
-        context "when subpath is \"#{subpath}\"" do
-          it "returns a #{klass}'s instance" do
-            expect(instance.template(subpath, false)).to be_a(klass)
-          end
+      'subdir1' => ::EacTemplates::Directory,
+      'subdir1/file1.template' => ::EacTemplates::File,
+      'subdir1/file2' => ::EacTemplates::File,
+      'subdir1/file3.template' => ::EacTemplates::File,
+      'does_not_exist' => ::NilClass
+    }.each do |subpath, klass|
+      context "when subpath is \"#{subpath}\"" do
+        let(:result) { instance.template(subpath, false) }
+
+        it "returns a #{klass}'s instance" do
+          expect(result).to be_a(klass)
         end
       end
     end
