@@ -28,6 +28,8 @@ module EacTemplates
       def source_object
         source_set.template(path_for_search)
       end
+
+      require_sub __FILE__
     end
   end
 end
