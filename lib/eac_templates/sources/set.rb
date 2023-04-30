@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
+require 'eac_templates/sources/directory'
 require 'eac_templates/variables/directory'
 require 'eac_templates/variables/file'
 require 'eac_templates/sources/internal_set'
@@ -12,6 +13,12 @@ module EacTemplates
         def default
           @default ||= new
         end
+      end
+
+      # @param subpath [Pathname]
+      # @return [EacTemplates::Sources::Directory]
+      def directory(subpath)
+        ::EacTemplates::Sources::Directory.new(self, subpath)
       end
 
       def template(subpath, required = true)
