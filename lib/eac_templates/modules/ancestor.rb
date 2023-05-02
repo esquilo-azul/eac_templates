@@ -2,6 +2,7 @@
 
 require 'eac_ruby_utils/core_ext'
 require 'eac_templates/interface_methods'
+require 'eac_templates/abstract/not_found_error'
 
 module EacTemplates
   module Modules
@@ -39,7 +40,7 @@ module EacTemplates
         return file if file.found?
         return directory if directory.found?
 
-        raise "No template found: #{path_for_search}"
+        raise ::EacTemplates::Abstract::NotFoundError, "No template found: #{path_for_search}"
       end
 
       require_sub __FILE__

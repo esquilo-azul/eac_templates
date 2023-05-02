@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_ruby_utils/core_ext'
+require 'eac_templates/abstract/not_found_error'
 
 module EacTemplates
   module Sources
@@ -25,7 +26,10 @@ module EacTemplates
 
       # @return [EacTemplates::Variables::SourceFile]
       def applier_uncached
-        raise "No #{self.class.name.downcase} found for \"#{subpath}\"" unless found?
+        unless found?
+          raise ::EacTemplates::Abstract::NotFoundError,
+                "No #{self.class.name.downcase} found for \"#{subpath}\""
+        end
 
         applier_class.new(real_paths.first)
       end
