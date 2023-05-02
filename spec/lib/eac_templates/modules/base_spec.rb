@@ -71,6 +71,13 @@ RSpec.describe ::EacTemplates::Modules::Base do
   end
   let(:files_dir) { __dir__.to_pathname.join('base_spec_files') }
   let(:variables_source) { { vx: '_X_', vy: '_Y_' } }
+  let(:source_set) do
+    r = ::EacTemplates::Sources::Set.new
+    %w[path1 path2].each do |sub|
+      r.included_paths << files_dir.join(sub)
+    end
+    r
+  end
 
   let(:a) { instance.child('a') }
   let(:a_a) { a.child('a_a') }
@@ -79,14 +86,8 @@ RSpec.describe ::EacTemplates::Modules::Base do
   let(:b) { instance.child('b') }
   let(:c) { instance.child('c') }
 
-  before do
-    %w[path1 path2].each do |sub|
-      ::EacTemplates::Sources::Set.default.included_paths << files_dir.join(sub)
-    end
-  end
-
   context 'when module is AModule' do # rubocop:disable RSpec/EmptyExampleGroup
-    let(:instance) { described_class.new(a_module) }
+    let(:instance) { described_class.new(a_module, source_set: source_set) }
 
     dir_specs(:a, %w[a_a])
     file_specs_ok(:a_a, "A_MODULE_A_A\n", "A_MODULE_A_A\n", [])
@@ -97,7 +98,7 @@ RSpec.describe ::EacTemplates::Modules::Base do
   end
 
   context 'when module is SuperClass' do # rubocop:disable RSpec/EmptyExampleGroup
-    let(:instance) { described_class.new(super_class) }
+    let(:instance) { described_class.new(super_class, source_set: source_set) }
 
     dir_specs(:a, %w[a_b])
     file_specs_error(:a_a)
@@ -108,7 +109,7 @@ RSpec.describe ::EacTemplates::Modules::Base do
   end
 
   context 'when module is SubClass' do # rubocop:disable RSpec/EmptyExampleGroup
-    let(:instance) { described_class.new(sub_class) }
+    let(:instance) { described_class.new(sub_class, source_set: source_set) }
 
     dir_specs(:a, %w[a_b])
     file_specs_error(:a_a)
