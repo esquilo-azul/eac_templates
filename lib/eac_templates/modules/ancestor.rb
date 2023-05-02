@@ -20,7 +20,7 @@ module EacTemplates
 
       # @return [EacTemplates::Modules::Directory]
       def directory
-        ::EacTemplates::Modules::Ancestor::Directory.new(self)
+        @directory ||= ::EacTemplates::Modules::Ancestor::Directory.new(self)
       end
 
       # @return [EacTemplates::Modules::File]
