@@ -61,12 +61,20 @@ RSpec.describe ::EacTemplates::Modules::Base do
     r.include a_module
     r
   end
+  let(:prepended_module) do
+    ::Module.new do
+      def self.name
+        'PrependedModule'
+      end
+    end
+  end
   let(:sub_class) do
     r = ::Class.new(super_class) do
       def self.name
         'SuperClass'
       end
     end
+    r.prepend(prepended_module)
     r
   end
   let(:files_dir) { __dir__.to_pathname.join('base_spec_files') }
@@ -117,5 +125,16 @@ RSpec.describe ::EacTemplates::Modules::Base do
     file_specs_error(:a_c)
     file_specs_ok(:b, "SUPER_CLASS_B\n", "SUPER_CLASS_B\n", [])
     file_specs_error(:c)
+  end
+
+  context 'when module is PrependedModule' do # rubocop:disable RSpec/EmptyExampleGroup
+    let(:instance) { described_class.new(prepended_module, source_set: source_set) }
+
+    file_specs_error(:a)
+    file_specs_error(:a_a)
+    file_specs_error(:a_b)
+    file_specs_error(:a_c)
+    file_specs_error(:b)
+    file_specs_ok(:c, "PREPENDED_MODULE_C%%vy%%%%vx%%\n", "PREPENDED_MODULE_C_Y__X_\n", %w[vy vx])
   end
 end
