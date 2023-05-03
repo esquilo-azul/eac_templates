@@ -18,13 +18,13 @@ module EacTemplates
       # @param subpath [Pathname]
       # @return [EacTemplates::Sources::Directory]
       def directory(subpath)
-        ::EacTemplates::Sources::Directory.new(self, subpath)
+        ::EacTemplates::Sources::Directory.by_subpath(self, nil, subpath, source_set: self)
       end
 
       # @param subpath [Pathname]
       # @return [EacTemplates::Sources::Directory]
       def file(subpath)
-        ::EacTemplates::Sources::File.new(self, subpath)
+        ::EacTemplates::Sources::File.by_subpath(self, nil, subpath, source_set: self)
       end
 
       def template(subpath, required = true)
