@@ -21,12 +21,14 @@ module EacTemplates
 
       # @return [EacTemplates::Modules::Directory]
       def directory
-        @directory ||= ::EacTemplates::Modules::Ancestor::Directory.new(self)
+        @directory ||= ::EacTemplates::Modules::Ancestor::Directory
+                         .new(self, nil, nil, source_set: source_set)
       end
 
       # @return [EacTemplates::Modules::File]
       def file
-        @file ||= ::EacTemplates::Modules::Ancestor::File.new(self)
+        @file ||= ::EacTemplates::Modules::Ancestor::File
+                    .new(self, nil, nil, source_set: source_set)
       end
 
       # @return [Pathname]
