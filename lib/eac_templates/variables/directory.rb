@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/abstract/directory'
 require 'eac_templates/variables/file'
 require 'eac_templates/variables/fs_object'
 
 module EacTemplates
   module Variables
     class Directory
-      attr_reader :path
-
-      def initialize(path)
-        @path = path.is_a?(::Pathname) ? path : ::Pathname.new(path.to_s)
+      common_constructor :abstract_directory do
+        self.abstract_directory = ::EacTemplates::Abstract::Directory.assert(abstract_directory)
       end
+      delegate :path, to: :abstract_directory
 
       def apply(variables_source, directory)
         ::EacTemplates::Variables::FsObject.new(self, '.', directory, variables_source).apply
