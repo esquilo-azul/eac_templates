@@ -2,10 +2,10 @@
 
 module EacTemplates
   module InterfaceMethods
-    COMMON = %w[apply path].freeze
-    ONLY_DIRECTORY = %w[child children].freeze
+    COMMON = %i[apply path].freeze
+    ONLY_DIRECTORY = %i[child children].freeze
     DIRECTORY = COMMON + ONLY_DIRECTORY
-    ONLY_FILE = %w[apply_to_file content variables].freeze
+    ONLY_FILE = %i[apply_to_file content variables].freeze
     FILE = COMMON + ONLY_FILE
     ALL = COMMON + ONLY_DIRECTORY + ONLY_FILE
   end
