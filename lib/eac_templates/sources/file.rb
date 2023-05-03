@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require 'eac_ruby_utils/core_ext'
+require 'eac_templates/interface_methods'
 require 'eac_templates/sources/fs_object'
 require 'eac_templates/variables/file'
 
 module EacTemplates
   module Sources
     class File < ::EacTemplates::Sources::FsObject
-      delegate :apply, :apply_to_file, :content, :path, :variables, to: :applier
+      delegate(*::EacTemplates::InterfaceMethods::FILE, to: :applier)
 
       # @return [Class]
       def applier_class
