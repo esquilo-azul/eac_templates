@@ -16,8 +16,8 @@ RSpec.describe EacTemplates::Modules::Base do
   def self.dir_specs(node_name, expected_children)
     on_node_specs(node_name) do
       it do
-        expect(node.children.map { |child| child.path.basename.to_path }).to(
-          eq(expected_children)
+        expect(node.children.map { |child| child.basename.to_path }.sort).to(
+          eq(expected_children.sort)
         )
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe EacTemplates::Modules::Base do
   let(:sub_class) do
     r = Class.new(super_class) do
       def self.name
-        'SuperClass'
+        'SubClass'
       end
     end
     r.prepend(prepended_module)
@@ -120,11 +120,11 @@ RSpec.describe EacTemplates::Modules::Base do
   context 'when module is SubClass' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(sub_class, source_set: source_set) }
 
-    dir_specs(:a, %w[a_b])
+    file_specs_error(:a)
     file_specs_error(:a_a)
-    file_specs_ok(:a_b, "SUPER_CLASS_A_B\n", "SUPER_CLASS_A_B\n", [])
+    file_specs_error(:a_b)
     file_specs_error(:a_c)
-    file_specs_ok(:b, "SUPER_CLASS_B\n", "SUPER_CLASS_B\n", [])
+    file_specs_ok(:b, "SUB_CLASS_B\n", "SUB_CLASS_B\n", [])
     file_specs_error(:c)
   end
 
