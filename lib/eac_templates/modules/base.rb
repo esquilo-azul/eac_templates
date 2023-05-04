@@ -11,17 +11,13 @@ module EacTemplates
     class Base
       include ::EacTemplates::Abstract::WithDirectoryFileMethods
       enable_listable
+      enable_simple_cache
       lists.add_symbol :option, :source_set, :subpath
       common_constructor :the_module, :options, default: [{}] do
         self.options = self.class.lists.option.hash_keys_validate!(options)
       end
       delegate(*::EacTemplates::InterfaceMethods::ALL, :path_for_search, :source_object,
                to: :sub_fs_object)
-
-      # @return [EacTemplates::Modules::Ancestor]
-      def self_ancestor
-        @self_ancestor ||= ::EacTemplates::Modules::Ancestor.new(self, the_module)
-      end
 
       # @return [EacTemplates::SourceSet]
       def source_set
@@ -31,6 +27,18 @@ module EacTemplates
       # @return [Pathname, nil]
       def subpath
         options[OPTION_SUBPATH].if_present(&:to_pathname)
+      end
+
+      private
+
+      # @return [Enumerable<EacTemplates::Modules::Ancestor>]
+      def ancestors_uncached
+        the_module.ancestors.map { |a| ::EacTemplates::Modules::Ancestor.new(self, a) }
+      end
+
+      # @return [EacTemplates::Modules::Ancestor]
+      def self_ancestor_uncached
+        ancestors.find { |a| a.ancestor == the_module } || ibr
       end
 
       require_sub __FILE__
