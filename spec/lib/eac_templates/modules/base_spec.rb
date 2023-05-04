@@ -109,23 +109,23 @@ RSpec.describe EacTemplates::Modules::Base do
   context 'when module is SuperClass' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(super_class, source_set: source_set) }
 
-    dir_specs(:a, %w[a_b])
-    file_specs_error(:a_a)
+    dir_specs(:a, %w[a_a a_b])
+    file_specs_ok(:a_a, "A_MODULE_A_A\n", "A_MODULE_A_A\n", [])
     file_specs_ok(:a_b, "SUPER_CLASS_A_B\n", "SUPER_CLASS_A_B\n", [])
     file_specs_error(:a_c)
     file_specs_ok(:b, "SUPER_CLASS_B\n", "SUPER_CLASS_B\n", [])
-    file_specs_error(:c)
+    file_specs_ok(:c, "A_MODULE_C%%vx%%\n", "A_MODULE_C_X_\n", %w[vx])
   end
 
   context 'when module is SubClass' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(sub_class, source_set: source_set) }
 
-    dir_specs(:a, %w[a_c])
-    file_specs_error(:a_a)
-    file_specs_error(:a_b)
+    dir_specs(:a, %w[a_a a_b a_c])
+    file_specs_ok(:a_a, "A_MODULE_A_A\n", "A_MODULE_A_A\n", [])
+    file_specs_ok(:a_b, "SUPER_CLASS_A_B\n", "SUPER_CLASS_A_B\n", [])
     file_specs_ok(:a_c, "SUB_CLASS_A_C\n", "SUB_CLASS_A_C\n", [])
     file_specs_ok(:b, "SUB_CLASS_B\n", "SUB_CLASS_B\n", [])
-    file_specs_error(:c)
+    file_specs_ok(:c, "PREPENDED_MODULE_C%%vy%%%%vx%%\n", "PREPENDED_MODULE_C_Y__X_\n", %w[vy vx])
   end
 
   context 'when module is PrependedModule' do # rubocop:disable RSpec/EmptyExampleGroup
