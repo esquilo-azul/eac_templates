@@ -23,12 +23,12 @@ module EacTemplates
         # @param subpath [Pathname]
         # @return [EacTemplates::Abstract::FsObject]
         def by_subpath(owner, parent_object, subpath, options = {})
-          r = nil
-          subpath.to_pathname.each_filename do |basename|
-            r = new(owner, parent_object, basename, options)
+          r = new(owner, parent_object, nil, options)
+          subpath.if_present(::Pathname.new(''), &:to_pathname).each_filename do |basename|
             parent_object = r
+            r = new(owner, parent_object, basename, options)
           end
-          r || raise("Subpath is empty: #{subpath}")
+          r
         end
       end
 
