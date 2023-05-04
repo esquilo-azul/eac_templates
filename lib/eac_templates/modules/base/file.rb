@@ -10,7 +10,13 @@ module EacTemplates
     class Base
       class File < ::EacTemplates::Abstract::File
         include ::EacTemplates::Modules::Base::FsObject
-        delegate(*EacTemplates::InterfaceMethods::FILE, to: :self_ancestor)
+        delegate(*EacTemplates::InterfaceMethods::FILE, to: :ancestor_found)
+
+        private
+
+        def ancestor_found_uncached
+          owner.ancestors.lazy.map(&:file).select(&:found?).first
+        end
       end
     end
   end
