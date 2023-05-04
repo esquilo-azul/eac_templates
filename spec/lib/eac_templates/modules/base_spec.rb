@@ -120,10 +120,10 @@ RSpec.describe EacTemplates::Modules::Base do
   context 'when module is SubClass' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(sub_class, source_set: source_set) }
 
-    file_specs_error(:a)
+    dir_specs(:a, %w[a_c])
     file_specs_error(:a_a)
     file_specs_error(:a_b)
-    file_specs_error(:a_c)
+    file_specs_ok(:a_c, "SUB_CLASS_A_C\n", "SUB_CLASS_A_C\n", [])
     file_specs_ok(:b, "SUB_CLASS_B\n", "SUB_CLASS_B\n", [])
     file_specs_error(:c)
   end
