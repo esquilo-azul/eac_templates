@@ -98,12 +98,12 @@ RSpec.describe ::EacTemplates::Modules::Base do
   context 'when module is AModule' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(a_module, source_set: source_set) }
 
-    dir_specs(:a, %w[a_a])
+    dir_specs(:a, %w[a_a a_b])
     file_specs_ok(:a_a, "A_MODULE_A_A\n", "A_MODULE_A_A\n", [])
-    file_specs_error(:a_b)
+    file_specs_ok(:a_b, "A_MODULE_A_B\n", "A_MODULE_A_B\n", [])
     file_specs_error(:a_c)
     file_specs_ok(:b, "A_MODULE_B%%vy%%\n", "A_MODULE_B_Y_\n", %w[vy])
-    file_specs_error(:c)
+    file_specs_ok(:c, "A_MODULE_C%%vx%%\n", "A_MODULE_C_X_\n", %w[vx])
   end
 
   context 'when module is SuperClass' do # rubocop:disable RSpec/EmptyExampleGroup

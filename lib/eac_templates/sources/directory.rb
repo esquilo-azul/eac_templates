@@ -11,7 +11,15 @@ module EacTemplates
 
       # @return [Hash<Pathname, Symbol>]
       def children_basenames
-        path.children.map { |c| [c.basename, real_path_type(c)] }.to_h
+        r = {}
+        real_paths.each do |real_path|
+          real_path.children.each do |child|
+            next if r.key?(child.basename)
+
+            r[child.basename] = real_path_type(child)
+          end
+        end
+        r
       end
 
       # @return [Pathname]
