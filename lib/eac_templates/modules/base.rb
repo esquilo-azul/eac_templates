@@ -30,6 +30,8 @@ module EacTemplates
       def subpath
         options[OPTION_SUBPATH].if_present(&:to_pathname)
       end
+
+      require_sub __FILE__
     end
   end
 end
