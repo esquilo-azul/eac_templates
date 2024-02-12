@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_ruby_gem_support: ".rubocop.yml"
-Gemspec/RequiredRubyVersion:
-  Exclude:
-  - eac_templates.gemspec
 Layout/LineEndStringConcatenationIndentation:
   Exclude:
   - lib/eac_templates/sources/set.rb
