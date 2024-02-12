@@ -35,10 +35,9 @@ module EacTemplates
       private
 
       def apply_fs_object(source_relative, target)
-        if ::File.directory?(source_absolute(source_relative))
-          apply_directory(source_relative, target)
-        elsif ::File.file?(source_absolute(source_relative))
-        end
+        return unless ::File.directory?(source_absolute(source_relative))
+
+        apply_directory(source_relative, target)
       end
 
       def source_absolute(source_relative)

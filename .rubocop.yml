@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_ruby_gem_support: ".rubocop.yml"
-Lint/EmptyConditionalBody:
-  Exclude:
-  - lib/eac_templates/variables/directory.rb
 Lint/RedundantCopDisableDirective:
   Exclude:
   - spec/lib/eac_templates/modules/base_spec.rb
