@@ -3,12 +3,12 @@
 require 'eac_templates/interface_methods'
 require 'eac_templates/sources/set'
 
-RSpec.describe ::EacTemplates::Sources::Set do
-  let(:files_dir) { ::File.join(__dir__, 'set_spec_files') }
+RSpec.describe EacTemplates::Sources::Set do
+  let(:files_dir) { File.join(__dir__, 'set_spec_files') }
   let(:instance) do
     r = described_class.new
-    r.included_paths << ::File.join(files_dir, 'path1')
-    r.included_paths << ::File.join(files_dir, 'path2')
+    r.included_paths << File.join(files_dir, 'path1')
+    r.included_paths << File.join(files_dir, 'path2')
     r
   end
 
@@ -27,11 +27,11 @@ RSpec.describe ::EacTemplates::Sources::Set do
         when :nil
           it { expect(result).to be_nil }
         when :directory
-          ::EacTemplates::InterfaceMethods::DIRECTORY.each do |method_name|
+          EacTemplates::InterfaceMethods::DIRECTORY.each do |method_name|
             it { expect(result).to respond_to(method_name) } # rubocop:disable RSpec/RepeatedExample
           end
         when :file
-          ::EacTemplates::InterfaceMethods::FILE.each do |method_name|
+          EacTemplates::InterfaceMethods::FILE.each do |method_name|
             it { expect(result).to respond_to(method_name) } # rubocop:disable RSpec/RepeatedExample
           end
         else ibr
