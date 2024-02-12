@@ -4,7 +4,7 @@ require 'eac_templates/interface_methods'
 require 'eac_templates/patches/object/template'
 
 RSpec.describe ::Object do
-  class MyStubWithTemplate # rubocop:disable RSpec/LeakyConstantDeclaration
+  class MyStubWithTemplate # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
   end
 
   let(:instance) { ::MyStubWithTemplate.new }

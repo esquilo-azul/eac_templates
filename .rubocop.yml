@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_ruby_gem_support: ".rubocop.yml"
-Lint/ConstantDefinitionInBlock:
-  Exclude:
-  - spec/lib/eac_templates/patches/object/template_spec.rb
 Lint/EmptyClass:
   Exclude:
   - spec/lib/eac_templates/patches/object/template_spec.rb
