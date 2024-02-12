@@ -35,9 +35,9 @@ module EacTemplates
       private
 
       def variables_uncached
-        content.scan(VARIABLE_PATTERN).map(&:first).map do |name|
+        content.scan(VARIABLE_PATTERN).map(&:first).to_set do |name| # rubocop:disable Style/MapToSet
           sanitize_variable_name(name)
-        end.to_set
+        end
       end
 
       def sanitize_variable_name(variable_name)

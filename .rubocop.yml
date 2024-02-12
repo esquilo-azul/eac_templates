@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_ruby_gem_support: ".rubocop.yml"
-Style/MapToSet:
-  Exclude:
-  - lib/eac_templates/variables/content.rb
 Style/OptionalBooleanParameter:
   Exclude:
   - lib/eac_templates/sources/set.rb
