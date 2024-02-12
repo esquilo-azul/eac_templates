@@ -1,45 +1,46 @@
-require:
-  - rubocop-rails
-  - rubocop-rspec
-
-AllCops:
-  TargetRailsVersion: 5.2
-  TargetRubyVersion: 2.7
-
-Metrics/BlockLength:
+---
+inherit_gem:
+  eac_ruby_gem_support: ".rubocop.yml"
+Gemspec/RequiredRubyVersion:
   Exclude:
-    - '**/*.gemspec'
-    - 'spec/**/*_spec.rb'
-
-Layout/LineLength:
-  Max: 100
-
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented_relative_to_receiver
-
-Rails/DynamicFindBy:
-  Enabled: false
-
-Rails/Output:
-  Enabled: false
-
-Rails/SkipsModelValidations:
-  Enabled: false
-
-Rails/TimeZone:
-  Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
+  - eac_templates.gemspec
+Layout/LineEndStringConcatenationIndentation:
+  Exclude:
+  - lib/eac_templates/sources/set.rb
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+  - spec/lib/eac_templates/patches/object/template_spec.rb
+Lint/EmptyClass:
+  Exclude:
+  - spec/lib/eac_templates/patches/object/template_spec.rb
+Lint/EmptyConditionalBody:
+  Exclude:
+  - lib/eac_templates/variables/directory.rb
+Lint/RedundantCopDisableDirective:
+  Exclude:
+  - spec/lib/eac_templates/modules/base_spec.rb
+RSpec/FilePath:
+  Exclude:
+  - spec/lib/eac_templates/patches/object/template_spec.rb
+RSpec/SpecFilePathFormat:
+  Exclude:
+  - spec/lib/eac_templates/patches/object/template_spec.rb
+Style/MapToSet:
+  Exclude:
+  - lib/eac_templates/variables/content.rb
+Style/OptionalBooleanParameter:
+  Exclude:
+  - lib/eac_templates/sources/set.rb
+Style/RedundantConstantBase:
+  Exclude:
+  - Gemfile
+  - lib/eac_templates/patches/module.rb
+  - lib/eac_templates/patches/object.rb
+  - lib/eac_templates/patches.rb
+  - lib/eac_templates/sources/from_all_gems.rb
+  - spec/lib/eac_templates/modules/base_spec.rb
+  - spec/lib/eac_templates/patches/object/template_spec.rb
+  - spec/lib/eac_templates/sources/set_spec.rb
+  - spec/lib/eac_templates/variables/content_spec.rb
+  - spec/rubocop_spec.rb
+  - spec/spec_helper.rb
