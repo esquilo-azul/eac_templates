@@ -6,7 +6,7 @@ require 'eac_templates/sources/set'
 
 RSpec.describe ::EacTemplates::Modules::Base do
   def self.on_node_specs(node_name, &block)
-    context "when object is \"#{node_name}\"" do # rubocop:disable RSpec/EmptyExampleGroup
+    context "when object is \"#{node_name}\"" do
       let(:node) { send(node_name) }
 
       instance_eval(&block)
