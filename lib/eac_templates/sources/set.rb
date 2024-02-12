@@ -47,8 +47,9 @@ module EacTemplates
       private
 
       def raise_template_not_found(subpath)
-        raise ::EacTemplates::Abstract::NotFoundError, 'Template not found for subpath ' \
-          "\"#{subpath}\" (Included paths: #{included_paths.to_a.join(::File::PATH_SEPARATOR)})"
+        raise ::EacTemplates::Abstract::NotFoundError,
+              'Template not found for subpath ' \
+              "\"#{subpath}\" (Included paths: #{included_paths.to_a.join(::File::PATH_SEPARATOR)})"
       end
     end
   end
