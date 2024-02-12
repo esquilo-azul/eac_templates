@@ -27,7 +27,7 @@ module EacTemplates
         ::EacTemplates::Sources::File.by_subpath(self, nil, subpath, source_set: self)
       end
 
-      def template(subpath, required = true)
+      def template(subpath, required = true) # rubocop:disable Style/OptionalBooleanParameter
         found_file = file(subpath)
         return found_file if found_file.found?
 
