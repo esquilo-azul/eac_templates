@@ -1,9 +1,6 @@
 ---
 inherit_gem:
   eac_ruby_gem_support: ".rubocop.yml"
-RSpec/FilePath:
-  Exclude:
-  - spec/lib/eac_templates/patches/object/template_spec.rb
 RSpec/SpecFilePathFormat:
   Exclude:
   - spec/lib/eac_templates/patches/object/template_spec.rb

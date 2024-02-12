@@ -3,7 +3,7 @@
 require 'eac_templates/interface_methods'
 require 'eac_templates/patches/object/template'
 
-RSpec.describe ::Object do
+RSpec.describe ::Object, '#template' do
   class MyStubWithTemplate # rubocop:disable Lint/ConstantDefinitionInBlock, Lint/EmptyClass, RSpec/LeakyConstantDeclaration
   end
 
