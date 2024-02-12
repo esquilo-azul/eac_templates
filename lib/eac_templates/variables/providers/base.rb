@@ -15,7 +15,8 @@ module EacTemplates
         def variable_value(name)
           return variable_fetch(name) if variable_exist?(name)
 
-          raise VariableNotFoundError, "Variable \"#{name}\" not found in #{source}"
+          raise ::EacTemplates::Variables::NotFoundError,
+                "Variable \"#{name}\" not found in #{source}"
         end
       end
     end
