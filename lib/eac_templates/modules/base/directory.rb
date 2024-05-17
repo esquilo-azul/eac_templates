@@ -12,6 +12,10 @@ module EacTemplates
         include ::EacTemplates::Modules::Base::FsObject
         delegate(*EacTemplates::InterfaceMethods::DIRECTORY, to: :self_ancestor)
 
+        # @param basename [Pathname]
+        # @return [EacTemplates::Abstract::FsObject]
+        delegate :child, to: :owner
+
         # @return [Hash<Pathname, Symbol>]
         def children_basenames
           owner.ancestors.each_with_object({}) do |e, a|
