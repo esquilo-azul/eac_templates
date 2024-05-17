@@ -16,7 +16,9 @@ module EacTemplates
       common_constructor :the_module, :options, default: [{}] do
         self.options = self.class.lists.option.hash_keys_validate!(options)
       end
-      delegate(*::EacTemplates::InterfaceMethods::ALL, :path_for_search, :source_object,
+      delegate(*::EacTemplates::InterfaceMethods::ONLY_DIRECTORY, to: :directory)
+      delegate(*::EacTemplates::InterfaceMethods::ONLY_FILE, to: :file)
+      delegate(*::EacTemplates::InterfaceMethods::COMMON, :path_for_search, :source_object,
                to: :sub_fs_object)
 
       # @return [EacTemplates::SourceSet]
