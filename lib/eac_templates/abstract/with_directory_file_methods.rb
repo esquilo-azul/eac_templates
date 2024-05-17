@@ -33,7 +33,7 @@ module EacTemplates
         directory_search = directory
         return directory_search if directory_search.found?
 
-        raise ::EacTemplates::Abstract::NotFoundError, "No template found: #{path_for_search}"
+        raise ::EacTemplates::Abstract::NotFoundError, "No template found: #{self}"
       end
     end
   end
