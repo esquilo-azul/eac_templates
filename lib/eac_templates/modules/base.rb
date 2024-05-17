@@ -21,6 +21,18 @@ module EacTemplates
       delegate(*::EacTemplates::InterfaceMethods::COMMON, :path_for_search, :source_object,
                to: :sub_fs_object)
 
+      # @param basename [Pathname]
+      # @return [EacTemplates::Abstract::FsObject]
+      def child(basename)
+        r = ::EacTemplates::Modules::Base.new(
+          the_module, subpath: child_subpath(basename), source_set: source_set
+        )
+        return r if r.found?
+
+        raise ::EacTemplates::Abstract::NotFoundError,
+              "No child for #{self} found with basename \"#{basename}\""
+      end
+
       # @return [EacTemplates::SourceSet]
       def source_set
         options[OPTION_SOURCE_SET] || ::EacTemplates::Sources::Set.default
