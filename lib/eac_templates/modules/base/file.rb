@@ -12,6 +12,10 @@ module EacTemplates
         include ::EacTemplates::Modules::Base::FsObject
         delegate(*EacTemplates::InterfaceMethods::FILE, to: :ancestor_found)
 
+        def found?
+          ancestor_found.present?
+        end
+
         private
 
         def ancestor_found_uncached
