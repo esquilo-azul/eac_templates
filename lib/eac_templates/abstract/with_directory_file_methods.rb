@@ -9,6 +9,12 @@ module EacTemplates
         fs_object_class(type).by_subpath(self, nil, subpath, source_set: source_set)
       end
 
+      # @param child_basename [Pathname
+      # @return [Pathname]
+      def child_subpath(child_basename)
+        subpath.if_present(child_basename) { |v| v.join(child_basename) }.to_pathname
+      end
+
       # @return [EacTemplates::Abstract::Directory]
       def directory
         build_fs_object(:directory)
