@@ -21,9 +21,13 @@ module EacTemplates
       delegate :subpath, :source_set, to: :base
       delegate(*::EacTemplates::InterfaceMethods::ALL, to: :sub_fs_object)
 
+      def ancestor_path_for_search
+        self.class.path_for_search(ancestor)
+      end
+
       # @return [Pathname]
       def path_for_search
-        r = self.class.path_for_search(ancestor)
+        r = ancestor_path_for_search
         subpath.if_present(r) { |v| r.join(v) }
       end
 
