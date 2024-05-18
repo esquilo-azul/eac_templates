@@ -33,6 +33,11 @@ module EacTemplates
               "No child for #{self} found with basename \"#{basename}\""
       end
 
+      # @return [Boolean]
+      def found?
+        file.found? || directory.found?
+      end
+
       # @return [EacTemplates::SourceSet]
       def source_set
         options[OPTION_SOURCE_SET] || ::EacTemplates::Sources::Set.default
