@@ -1,0 +1,59 @@
+h1. E.A.C. Templates
+
+Seja a árvore fonte:
+
+<pre><code class="shell">
+./
+├── path1/
+│   ├── a_module/
+│   │   ├── a/
+│   │   │   └── a_a
+│   │   └── b
+│   ├── sub_class/
+│   │   └── a/
+│   │       └── a_c
+│   └── super_class/
+│       ├── a/
+│       │   └── a_b
+│       └── b
+└── path2/
+    ├── a_module/
+    │   ├── a/
+    │   │   └── a_b
+    │   ├── b
+    │   └── c
+    ├── prepended_module/
+    │   └── c
+    ├── sub_class/
+    │   └── b
+    └── super_class/
+        ├── a/
+        │   └── a_b
+        └── b
+</code></pre>
+
+Com caminhos de busca @./path1/@ e @./path2/@, nessa ordem. E os módulos:
+
+<pre><code class="ruby">
+module AModule; end
+
+class SuperClass
+  include AModule
+end
+
+module PrependedModule; end
+
+class SubClass < SuperClass
+  prepend PrependedModule
+end
+</code></pre>
+
+O resultado da busca deve ser:
+
+|_. Caminho buscado |_. AModule |_. SuperClass |_. PrependedModule |_. SubClass |
+|_. a | @[a_a, a_b]@ | @[a_a, a_b]@ | @[a_a, a_b]@ |  @[a_a, a_b, a_c]@ |
+|_. a/a_a | @path1/a_module/a/a_a@ | @path1/a_module/a/a_a@ | _Não encontra_ | @path1/a_module/a/a_a@  |
+|_. a/a_b | @path2/a_module/a/a_b@ | @path1/super_class/a/a_b@| _Não encontra_ | @path1/super_class/a/a_b@ |
+|_. a/a_c | _Não encontra_ | _Não encontra_  | _Não encontra_ |  @path1/a_module/a/a_c@ |
+|_. b | @path1/a_module/b@ | @path1/super_class/b@ | _Não encontra_ | @path1/sub_class/b@ |
+|_. c | @path2/a_module/c@ | @path2/a_module/c@ |@path2/prepended_module/c@ | @path2/prepended_module/c@ |
