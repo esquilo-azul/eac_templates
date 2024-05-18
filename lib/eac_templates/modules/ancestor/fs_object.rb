@@ -10,9 +10,7 @@ module EacTemplates
         delegate :found?, :path, to: :source_object
 
         # @return [Pathname]
-        def path_for_search_prefix
-          owner.path_for_search
-        end
+        delegate :path_for_search, to: :owner
 
         private
 
