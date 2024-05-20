@@ -5,6 +5,8 @@ require 'eac_templates/abstract/not_found_error'
 require 'eac_templates/sources/set'
 
 RSpec.describe EacTemplates::Modules::Base do
+  include_context 'with modules resouces'
+
   def self.on_node_specs(node_name, &block)
     context "when object is \"#{node_name}\"" do
       let(:node) { send(node_name) }
@@ -44,48 +46,6 @@ RSpec.describe EacTemplates::Modules::Base do
         expect { node }.to raise_error(EacTemplates::Abstract::NotFoundError)
       end
     end
-  end
-
-  let(:a_module) do
-    Module.new do
-      def self.name
-        'AModule'
-      end
-    end
-  end
-  let(:super_class) do
-    r = Class.new do
-      def self.name
-        'SuperClass'
-      end
-    end
-    r.include a_module
-    r
-  end
-  let(:prepended_module) do
-    Module.new do
-      def self.name
-        'PrependedModule'
-      end
-    end
-  end
-  let(:sub_class) do
-    r = Class.new(super_class) do
-      def self.name
-        'SubClass'
-      end
-    end
-    r.prepend(prepended_module)
-    r
-  end
-  let(:files_dir) { __dir__.to_pathname.join('base_spec_files') }
-  let(:variables_source) { { vx: '_X_', vy: '_Y_' } }
-  let(:source_set) do
-    r = EacTemplates::Sources::Set.new
-    %w[path1 path2].each do |sub|
-      r.included_paths << files_dir.join(sub)
-    end
-    r
   end
 
   let(:a) { instance.child('a') }
