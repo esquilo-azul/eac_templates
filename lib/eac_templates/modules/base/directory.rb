@@ -14,7 +14,9 @@ module EacTemplates
 
         # @param basename [Pathname]
         # @return [EacTemplates::Abstract::FsObject]
-        delegate :child, to: :owner
+        def child(basename)
+          owner.build_child(basename)
+        end
 
         # @return [Hash<Pathname, Symbol>]
         def children_basenames

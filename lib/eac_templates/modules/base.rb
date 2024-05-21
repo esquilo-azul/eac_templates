@@ -22,8 +22,8 @@ module EacTemplates
                :source_object, :type, to: :sub_fs_object)
 
       # @param basename [Pathname]
-      # @return [EacTemplates::Abstract::FsObject]
-      def child(basename)
+      # @return [EacTemplates::Modules::Base]
+      def build_child(basename)
         r = ::EacTemplates::Modules::Base.new(
           the_module, subpath: child_subpath(basename), source_set: source_set
         )
