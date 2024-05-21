@@ -37,7 +37,7 @@ module EacTemplates
         # @param result [Hash<Pathname, Symbol>]
         # @return [void]
         def ancestor_children_names(ancestor, result)
-          ancestor.directory.source_object.children_basenames.each do |path, type|
+          ancestor.children_basenames.each do |path, type|
             result[path] = type
           end
         end
