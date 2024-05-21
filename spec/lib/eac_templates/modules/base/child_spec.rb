@@ -83,7 +83,7 @@ RSpec.describe EacTemplates::Modules::Base, '#child' do
   context 'when module is SubClass' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(sub_class, source_set: source_set) }
 
-    dir_specs(:a, %w[a_a a_b a_c a_d a_d.template])
+    dir_specs(:a, %w[a_a a_b a_c a_d])
     file_specs_ok(:a_a, "A_MODULE.P1.A_A\n", "A_MODULE.P1.A_A\n", [])
     file_specs_ok(:a_b, "SUPER_CLASS.P1.A_B\n", "SUPER_CLASS.P1.A_B\n", [])
     file_specs_ok(:a_c, "SUB_CLASS.P1.A_C\n", "SUB_CLASS.P1.A_C\n", [])
@@ -97,7 +97,7 @@ RSpec.describe EacTemplates::Modules::Base, '#child' do
   context 'when module is PrependedModule' do # rubocop:disable RSpec/EmptyExampleGroup
     let(:instance) { described_class.new(prepended_module, source_set: source_set) }
 
-    dir_specs(:a, %w[a_d.template])
+    dir_specs(:a, %w[a_d])
     file_specs_error(:a_a)
     file_specs_error(:a_b)
     file_specs_error(:a_c)

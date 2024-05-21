@@ -21,7 +21,7 @@ module EacTemplates
 
         # @return [Hash<Pathname, Symbol>]
         def children_basenames
-          owner.ancestors.each_with_object({}) do |e, a|
+          owner.ancestors.select(&:directory?).each_with_object({}) do |e, a|
             ancestor_children_names(e, a)
           end
         end
