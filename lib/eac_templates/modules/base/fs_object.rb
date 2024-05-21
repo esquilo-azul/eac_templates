@@ -10,8 +10,6 @@ module EacTemplates
         def self_ancestor
           owner.self_ancestor.send(type)
         end
-
-        delegate :found?, to: :self_ancestor
       end
     end
   end
