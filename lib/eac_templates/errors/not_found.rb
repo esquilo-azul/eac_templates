@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module EacTemplates
-  module Abstract
-    class NotFoundError < ::RuntimeError
+  module Errors
+    class NotFound < ::RuntimeError
     end
   end
 end

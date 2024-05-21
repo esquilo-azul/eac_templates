@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/errors/not_found'
 
 module EacTemplates
   module Abstract
@@ -50,7 +50,7 @@ module EacTemplates
         return file if file.found?
         return directory if directory.found?
 
-        raise ::EacTemplates::Abstract::NotFoundError, "No template found: #{self}"
+        raise ::EacTemplates::Errors::NotFound, "No template found: #{self}"
       end
 
       private

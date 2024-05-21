@@ -2,7 +2,7 @@
 
 require 'eac_ruby_utils/core_ext'
 require 'eac_templates/abstract/fs_object_by_pathname'
-require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/errors/not_found'
 
 module EacTemplates
   module Abstract
@@ -72,7 +72,7 @@ module EacTemplates
       end
 
       def raise_not_found(message)
-        raise ::EacTemplates::Abstract::NotFoundError, message
+        raise ::EacTemplates::Errors::NotFound, message
       end
 
       # @return [EacTemplates::Sources::Set]

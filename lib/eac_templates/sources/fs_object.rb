@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_ruby_utils/core_ext'
-require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/errors/not_found'
 
 module EacTemplates
   module Sources

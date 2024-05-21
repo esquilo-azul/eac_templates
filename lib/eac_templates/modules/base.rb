@@ -29,7 +29,7 @@ module EacTemplates
         )
         return r if r.found?
 
-        raise ::EacTemplates::Abstract::NotFoundError,
+        raise ::EacTemplates::Errors::NotFound,
               "No child for #{self} found with basename \"#{basename}\""
       end
 

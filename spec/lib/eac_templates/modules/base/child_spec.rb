@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'eac_templates/modules/base'
-require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/errors/not_found'
 require 'eac_templates/sources/set'
 
 RSpec.describe EacTemplates::Modules::Base, '#child' do
@@ -43,7 +43,7 @@ RSpec.describe EacTemplates::Modules::Base, '#child' do
   def self.file_specs_error(node_name)
     on_node_specs(node_name) do
       it do
-        expect { node }.to raise_error(EacTemplates::Abstract::NotFoundError)
+        expect { node }.to raise_error(EacTemplates::Errors::NotFound)
       end
     end
   end

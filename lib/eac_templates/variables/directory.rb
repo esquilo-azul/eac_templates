@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/errors/not_found'
 require 'eac_templates/abstract/directory'
 require 'eac_templates/variables/file'
 require 'eac_templates/variables/fs_object'
@@ -22,7 +22,7 @@ module EacTemplates
         return ::EacTemplates::Variables::File.new(child_path) if ::File.file?(child_path)
         return ::EacTemplates::Variables::Directory.new(child_path) if ::File.directory?(child_path)
 
-        raise ::EacTemplates::Abstract::NotFoundError,
+        raise ::EacTemplates::Errors::NotFound,
               "Child \"#{subpath}\" from \"#{path}\" not found"
       end
 

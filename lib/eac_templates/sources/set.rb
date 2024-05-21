@@ -4,7 +4,7 @@ require 'active_support/core_ext/object/blank'
 require 'eac_templates/sources/directory'
 require 'eac_templates/sources/file'
 require 'eac_templates/sources/internal_set'
-require 'eac_templates/abstract/not_found_error'
+require 'eac_templates/errors/not_found'
 
 module EacTemplates
   module Sources
@@ -47,7 +47,7 @@ module EacTemplates
       private
 
       def raise_template_not_found(subpath)
-        raise ::EacTemplates::Abstract::NotFoundError,
+        raise ::EacTemplates::Errors::NotFound,
               'Template not found for subpath ' \
               "\"#{subpath}\" (Included paths: #{included_paths.to_a.join(::File::PATH_SEPARATOR)})"
       end
