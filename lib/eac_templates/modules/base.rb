@@ -21,16 +21,16 @@ module EacTemplates
       delegate(*::EacTemplates::InterfaceMethods::COMMON, :basename, :path_for_search,
                :source_object, :type, to: :sub_fs_object)
 
-      # @param basename [Pathname]
+      # @param child_basename [Pathname]
       # @return [EacTemplates::Modules::Base]
-      def build_child(basename)
+      def build_child(child_basename)
         r = ::EacTemplates::Modules::Base.new(
-          the_module, subpath: child_subpath(basename), source_set: source_set
+          the_module, subpath: child_subpath(child_basename), source_set: source_set
         )
         return r if r.found?
 
         raise ::EacTemplates::Errors::NotFound,
-              "No child for #{self} found with basename \"#{basename}\""
+              "No child for #{self} found with basename \"#{child_basename}\""
       end
 
       # @return [Boolean]
