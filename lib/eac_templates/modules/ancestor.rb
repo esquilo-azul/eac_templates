@@ -19,7 +19,7 @@ module EacTemplates
 
       common_constructor :base, :ancestor
       delegate :subpath, :source_set, to: :base
-      delegate(*::EacTemplates::InterfaceMethods::ALL, to: :sub_fs_object)
+      delegate(*::EacTemplates::InterfaceMethods::ALL + [:children_basenames], to: :sub_fs_object)
 
       def ancestor_path_for_search
         self.class.path_for_search(ancestor)
