@@ -19,7 +19,7 @@ module EacTemplates
       delegate(*::EacTemplates::InterfaceMethods::ONLY_DIRECTORY, to: :directory)
       delegate(*::EacTemplates::InterfaceMethods::ONLY_FILE, to: :file)
       delegate(*::EacTemplates::InterfaceMethods::COMMON, :basename, :path_for_search,
-               :source_object, to: :sub_fs_object)
+               :source_object, :type, to: :sub_fs_object)
 
       # @param basename [Pathname]
       # @return [EacTemplates::Abstract::FsObject]
