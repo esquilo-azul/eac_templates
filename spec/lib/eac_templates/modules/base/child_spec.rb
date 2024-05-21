@@ -4,7 +4,7 @@ require 'eac_templates/modules/base'
 require 'eac_templates/abstract/not_found_error'
 require 'eac_templates/sources/set'
 
-RSpec.describe EacTemplates::Modules::Base do
+RSpec.describe EacTemplates::Modules::Base, '#child' do
   include_context 'with modules resouces'
 
   def self.on_node_specs(node_name, &block)
