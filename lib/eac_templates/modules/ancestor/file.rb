@@ -24,6 +24,11 @@ module EacTemplates
             end
           end
         end
+
+        # @return [Pathname]
+        def basename
+          self.class.parse_basename(super)
+        end
       end
     end
   end
