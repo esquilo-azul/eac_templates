@@ -12,6 +12,10 @@ module EacTemplates
         include ::EacTemplates::Modules::Base::FsObject
         delegate(*EacTemplates::InterfaceMethods::FILE, to: :ancestor_found)
 
+        def basename
+          ancestor_found.if_present(&:basename)
+        end
+
         def found?
           ancestor_found.present?
         end
