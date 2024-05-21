@@ -53,6 +53,16 @@ module EacTemplates
         "#{self.class}[#{the_module.name}#\"#{subpath}\"]"
       end
 
+      # @param required_type [Symbol]
+      # @return [self]
+      # @raise [EacTemplates::Errors::TypeMismatch]
+      def validate_type(required_type)
+        return self if valid_type?(required_type)
+
+        raise ::EacTemplates::Errors::TypeMismatch, "A #{required_type} type was expected, but a " \
+                                                    "#{type} was builded"
+      end
+
       private
 
       # @return [Enumerable<EacTemplates::Modules::Ancestor>]
@@ -63,6 +73,16 @@ module EacTemplates
       # @return [EacTemplates::Modules::Ancestor]
       def self_ancestor_uncached
         ancestors.find { |a| a.ancestor == the_module } || ibr
+      end
+
+      # @return [Boolean]
+      def valid_type?(required_type)
+        file_types = %i[file file_template]
+        if file_types.include?(required_type)
+          file_types.include?(type)
+        else
+          type == required_type
+        end
       end
 
       require_sub __FILE__
