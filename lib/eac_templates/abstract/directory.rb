@@ -12,7 +12,7 @@ module EacTemplates
       delegate(*::EacTemplates::InterfaceMethods::DIRECTORY - %i[child chidren], to: :applier)
 
       # @param basename [Pathname]
-      # @return [EacTemplates::Abstract::FsObject
+      # @return [EacTemplates::Abstract::FsObject]
       def build_child(child_basename, child_type)
         child_basename = child_basename.to_pathname
         child_type = type_list.value_validate!(child_type)
