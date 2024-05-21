@@ -10,13 +10,14 @@ module EacTemplates
     class Base
       class Directory < ::EacTemplates::Abstract::Directory
         include ::EacTemplates::Modules::Base::FsObject
-        delegate(*(EacTemplates::InterfaceMethods::DIRECTORY - %i[children]), to: :self_ancestor)
+        delegate(*(EacTemplates::InterfaceMethods::DIRECTORY - %i[child children]),
+                 to: :self_ancestor)
 
-        # @param basename [Pathname]
-        # @return [EacTemplates::Abstract::FsObject]
-        def child(basename)
-          owner.build_child(basename)
-        end
+        # @!method build_child(child_basename, child_type)
+        #   @param child_basename [Pathname]
+        #   @param child_type [Symbol]
+        #   @return [EacTemplates::Modules::Base]
+        delegate :build_child, to: :owner
 
         # @return [Hash<Pathname, Symbol>]
         def children_basenames

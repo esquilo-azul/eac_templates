@@ -5,6 +5,7 @@ require 'eac_templates/interface_methods'
 require 'eac_templates/abstract/with_directory_file_methods'
 require 'eac_templates/modules/ancestor'
 require 'eac_templates/sources/set'
+require 'eac_templates/errors/type_mismatch'
 
 module EacTemplates
   module Modules
@@ -22,12 +23,13 @@ module EacTemplates
                :source_object, :type, to: :sub_fs_object)
 
       # @param child_basename [Pathname]
+      # @param child_type [Symbol]
       # @return [EacTemplates::Modules::Base]
-      def build_child(child_basename)
+      def build_child(child_basename, child_type)
         r = ::EacTemplates::Modules::Base.new(
           the_module, subpath: child_subpath(child_basename), source_set: source_set
         )
-        return r if r.found?
+        return r.validate_type(child_type) if r.found?
 
         raise ::EacTemplates::Errors::NotFound,
               "No child for #{self} found with basename \"#{child_basename}\""
