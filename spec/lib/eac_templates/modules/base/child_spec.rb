@@ -90,7 +90,8 @@ RSpec.describe EacTemplates::Modules::Base, '#child' do
     file_specs_ok(:b, "SUB_CLASS.P2.B\n", "SUB_CLASS.P2.B\n", [])
     file_specs_ok(:c, "PREPENDED_MODULE.P2.C.%%vy%%%%vx%%\n", "PREPENDED_MODULE.P2.C._Y__X_\n",
                   %w[vy vx])
-    file_specs_error(:d)
+    file_specs_ok(:d, "PREPENDED_MODULE.P2.D.%%vy%%%%vx%%\n", "PREPENDED_MODULE.P2.D._Y__X_\n",
+                  %w[vy vx])
   end
 
   context 'when module is PrependedModule' do # rubocop:disable RSpec/EmptyExampleGroup
@@ -103,6 +104,7 @@ RSpec.describe EacTemplates::Modules::Base, '#child' do
     file_specs_error(:b)
     file_specs_ok(:c, "PREPENDED_MODULE.P2.C.%%vy%%%%vx%%\n", "PREPENDED_MODULE.P2.C._Y__X_\n",
                   %w[vy vx])
-    file_specs_error(:d)
+    file_specs_ok(:d, "PREPENDED_MODULE.P2.D.%%vy%%%%vx%%\n", "PREPENDED_MODULE.P2.D._Y__X_\n",
+                  %w[vy vx])
   end
 end

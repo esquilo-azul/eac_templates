@@ -25,6 +25,11 @@ module EacTemplates
           end
         end
 
+        # @return [Boolean]
+        def found?
+          source_object.found? || template?
+        end
+
         # @return [Pathname]
         def path
           template? ? template_source_object.path : source_object.path
