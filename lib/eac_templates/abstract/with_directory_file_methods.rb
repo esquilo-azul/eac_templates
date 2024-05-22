@@ -19,6 +19,11 @@ module EacTemplates
         subpath.if_present(child_basename) { |v| v.join(child_basename) }.to_pathname
       end
 
+      # @return [Boolean]
+      def directory?
+        directory.found?
+      end
+
       # @param type [Symbol]
       # @return [Class]
       def fs_object_class(type)
