@@ -29,6 +29,20 @@ module EacTemplates
         def basename
           self.class.parse_basename(super)
         end
+
+        protected
+
+        # @return [EacTemplates::Sources::File]
+        def template_source_object_uncached
+          owner.source_set.send(type, template_source_object_path_for_search)
+        end
+
+        # @return [Pathname]
+        def template_source_object_path_for_search
+          path_for_search.basename_sub do |b|
+            "#{b}#{::EacTemplates::Variables::FsObject::TEMPLATE_EXTNAME}"
+          end
+        end
       end
     end
   end
