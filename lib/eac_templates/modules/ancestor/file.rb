@@ -26,6 +26,11 @@ module EacTemplates
         end
 
         # @return [Pathname]
+        def path
+          template? ? template_source_object.path : source_object.path
+        end
+
+        # @return [Pathname]
         def basename
           self.class.parse_basename(super)
         end
