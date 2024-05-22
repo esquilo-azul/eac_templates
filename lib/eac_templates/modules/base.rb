@@ -48,6 +48,11 @@ module EacTemplates
         options[OPTION_SUBPATH].if_present(&:to_pathname)
       end
 
+      # @return [String]
+      def to_s
+        "#{self.class}[#{the_module.name}#\"#{subpath}\"]"
+      end
+
       private
 
       # @return [Enumerable<EacTemplates::Modules::Ancestor>]
