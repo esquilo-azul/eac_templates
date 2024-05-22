@@ -24,6 +24,11 @@ module EacTemplates
         directory.found?
       end
 
+      # @return [Boolean]
+      def file?
+        file.found?
+      end
+
       # @param type [Symbol]
       # @return [Class]
       def fs_object_class(type)
