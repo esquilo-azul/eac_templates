@@ -7,8 +7,6 @@ module EacTemplates
   module Modules
     class Ancestor
       module FsObject
-        delegate :path, to: :source_object
-
         # @return [Pathname]
         delegate :path_for_search, to: :owner
 
