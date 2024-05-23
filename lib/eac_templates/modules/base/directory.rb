@@ -10,8 +10,18 @@ module EacTemplates
     class Base
       class Directory < ::EacTemplates::Abstract::Directory
         include ::EacTemplates::Modules::Base::FsObject
-        delegate(*(EacTemplates::InterfaceMethods::DIRECTORY - %i[child children]),
+        delegate(*(EacTemplates::InterfaceMethods::DIRECTORY - %i[apply child children]),
                  to: :self_ancestor)
+
+        # @param variables_source [Object]
+        # @param target_path [Pathname]
+        def apply(variables_source, target_path)
+          target_path = target_path.to_pathname
+          target_path.mkpath
+          children.each do |child|
+            child_apply(child, variables_source, target_path.join(child.basename))
+          end
+        end
 
         # @!method build_child(child_basename, child_type)
         #   @param child_basename [Pathname]
