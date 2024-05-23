@@ -41,6 +41,21 @@ module EacTemplates
             result[path] = type
           end
         end
+
+        # @param child [EacTemplates::Modules::Base]
+        # # @param variables_source [Object]
+        # @param target_path [Pathname]
+        def child_apply(child, variables_source, target_path)
+          if child.directory?
+            child.apply(variables_source, target_path)
+          elsif child.file_template?
+            child.apply_to_file(variables_source, target_path)
+          elsif child.file?
+            ::FileUtils.cp(child.path, target_path)
+          else
+            ibr
+          end
+        end
       end
     end
   end
