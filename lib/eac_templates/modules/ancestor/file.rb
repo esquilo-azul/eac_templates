@@ -30,6 +30,11 @@ module EacTemplates
           self.class.parse_basename(super)
         end
 
+        # @return [Boolean]
+        def template?
+          template_source_object.found?
+        end
+
         protected
 
         # @return [EacTemplates::Sources::File]
