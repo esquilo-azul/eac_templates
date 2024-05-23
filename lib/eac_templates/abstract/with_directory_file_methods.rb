@@ -30,6 +30,11 @@ module EacTemplates
       end
 
       # @return [Boolean]
+      def file_template?
+        file? && file.template?
+      end
+
+      # @return [Boolean]
       def found?
         directory? || file?
       end
