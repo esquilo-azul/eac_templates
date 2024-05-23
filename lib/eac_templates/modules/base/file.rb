@@ -10,7 +10,7 @@ module EacTemplates
     class Base
       class File < ::EacTemplates::Abstract::File
         include ::EacTemplates::Modules::Base::FsObject
-        delegate(*EacTemplates::InterfaceMethods::FILE, to: :ancestor_found)
+        delegate(*EacTemplates::InterfaceMethods::FILE + [:template?], to: :ancestor_found)
 
         def basename
           ancestor_found.if_present(&:basename)
