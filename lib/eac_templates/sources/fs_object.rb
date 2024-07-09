@@ -28,6 +28,11 @@ module EacTemplates
         PATH_FOR_SEARCH_PREFIX
       end
 
+      # @return [String]
+      def to_s
+        "#{self.class.name}[#{path_for_search}]"
+      end
+
       protected
 
       # @return [Array<Pathname>]
