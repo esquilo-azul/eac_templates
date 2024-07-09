@@ -33,7 +33,7 @@ module EacTemplates
       # @return [Array<Pathname>]
       def real_paths_uncached
         source_set.included_paths.lazy.map { |source_single| source_single_search(source_single) }
-          .select(&:present?)
+          .reject(&:nil?) # rubocop:disable Style/CollectionCompact
       end
 
       # @param path [Pathname]
