@@ -24,6 +24,11 @@ module EacTemplates
         r = path.join(subpath)
         r.exist? ? r : nil
       end
+
+      # @return [String]
+      def to_s
+        "#{self.class.name}[#{path}]"
+      end
     end
   end
 end
