@@ -10,6 +10,11 @@ module EacTemplates
         # @return [Pathname]
         delegate :path_for_search, to: :owner
 
+        # @return [String]
+        def to_s
+          "#{self.class.name}[#{path_for_search}]"
+        end
+
         private
 
         def source_object_uncached
