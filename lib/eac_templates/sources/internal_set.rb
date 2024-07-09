@@ -17,6 +17,11 @@ module EacTemplates
       def <<(single)
         add(single)
       end
+
+      # @return [String]
+      def to_s
+        "#{self.class.name}[#{map(&:to_s).join(', ')}]"
+      end
     end
   end
 end
