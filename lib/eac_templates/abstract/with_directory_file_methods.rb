@@ -53,6 +53,14 @@ module EacTemplates
         raise ::EacTemplates::Errors::NotFound, "No template found: #{self}"
       end
 
+      # @return [String]
+      def to_s
+        v = 'NOT_FOUND'
+        v = directory.to_s if directory?
+        v = file.to_s if file?
+        "#{self.class.name}[#{v}]"
+      end
+
       private
 
       # @return [EacTemplates::Abstract::Directory]
