@@ -44,6 +44,11 @@ module EacTemplates
         @included_paths ||= ::EacTemplates::Sources::InternalSet.new
       end
 
+      # @return [String]
+      def to_s
+        "#{self.class.name}[#{included_paths}]"
+      end
+
       private
 
       def raise_template_not_found(subpath)
