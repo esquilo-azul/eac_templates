@@ -39,7 +39,7 @@ module EacTemplates
       # @param path [Pathname]
       # @return [Boolean]
       def select_path?(path)
-        path.present? && path.send("#{type}?")
+        !path.nil? && path.send("#{type}?")
       end
 
       # @param source_single [EacTemplates::Sources::Single]
