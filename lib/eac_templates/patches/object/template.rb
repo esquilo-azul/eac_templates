@@ -3,7 +3,5 @@
 require 'eac_templates/patches/module/template'
 
 class Object
-  def template
-    self.class.template
-  end
+  delegate :template, to: :class
 end
