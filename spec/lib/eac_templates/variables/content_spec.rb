@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_config/old_configs'
+require 'eac_config'
 require 'eac_templates/variables/file'
 
 RSpec.describe EacTemplates::Variables::Content do
