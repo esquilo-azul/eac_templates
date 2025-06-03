@@ -25,7 +25,7 @@ module EacTemplates
       def child(basename)
         basename = basename.to_pathname
         children.find { |c| c.basename == basename } ||
-          raise_not_found("No child found with basename \"#{basename}\"")
+          raise_not_found("No child found with basename \"#{basename}\" in \"#{self}\"")
       end
 
       # @return [Enumerable<EacTemplates::Abstract::FsObject>]
