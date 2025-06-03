@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'eac_ruby_utils/core_ext'
+require 'eac_ruby_utils'
 require 'eac_templates/abstract/file'
 require 'eac_templates/variables/content'
 require 'eac_templates/variables/providers'
