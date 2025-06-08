@@ -89,6 +89,11 @@ module EacTemplates
       def type_list
         ::EacTemplates::Abstract::FsObject.lists.type
       end
+
+      def to_s
+        source_set = options.if_key(:source_set, '-', &:included_paths)
+        "#{self.class}[Basename: #{basename}, Source Set: #{source_set}]"
+      end
     end
   end
 end
