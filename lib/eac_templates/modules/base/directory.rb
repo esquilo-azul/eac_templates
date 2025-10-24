@@ -10,6 +10,7 @@ module EacTemplates
     class Base
       class Directory < ::EacTemplates::Abstract::Directory
         include ::EacTemplates::Modules::Base::FsObject
+
         delegate(*(EacTemplates::InterfaceMethods::DIRECTORY - %i[apply child children]),
                  to: :self_ancestor)
 

@@ -7,7 +7,7 @@ module EacTemplates
   module Variables
     class Content
       VARIABLE_DELIMITER = ::Regexp.quote('%%')
-      VARIABLE_PATTERN = /#{VARIABLE_DELIMITER}([a-z0-9\._]*)#{VARIABLE_DELIMITER}/i.freeze
+      VARIABLE_PATTERN = /#{VARIABLE_DELIMITER}([a-z0-9._]*)#{VARIABLE_DELIMITER}/i.freeze
 
       class << self
         # @param path [Pathname]
@@ -35,7 +35,7 @@ module EacTemplates
       private
 
       def variables_uncached
-        content.scan(VARIABLE_PATTERN).map(&:first).to_set do |name| # rubocop:disable Style/MapToSet
+        content.scan(VARIABLE_PATTERN).map(&:first).to_set do |name|
           sanitize_variable_name(name)
         end
       end

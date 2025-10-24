@@ -11,6 +11,7 @@ module EacTemplates
   module Modules
     class Base
       include ::EacTemplates::Abstract::WithDirectoryFileMethods
+
       enable_listable
       enable_simple_cache
       lists.add_symbol :option, :source_set, :subpath

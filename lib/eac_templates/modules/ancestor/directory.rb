@@ -10,6 +10,7 @@ module EacTemplates
     class Ancestor
       class Directory < ::EacTemplates::Abstract::Directory
         include ::EacTemplates::Modules::Ancestor::FsObject
+
         delegate :found?, :path, to: :source_object
 
         # @return [Hash<Pathname, Symbol>]
