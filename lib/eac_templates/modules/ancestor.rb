@@ -9,11 +9,13 @@ module EacTemplates
     class Ancestor
       include ::EacTemplates::Abstract::WithDirectoryFileMethods
 
+      NO_NAME_NAME = '__undefined__'
+
       class << self
         # @param a_module [Module]
         # @return [Pathname]
         def path_for_search(a_module)
-          a_module.name.underscore.to_pathname
+          a_module.name.if_present(NO_NAME_NAME, &:underscore).to_pathname
         end
       end
 
